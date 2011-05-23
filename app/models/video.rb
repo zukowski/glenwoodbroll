@@ -1,4 +1,6 @@
 class Video < ActiveRecord::Base
-  validates :title, :description, :presence => true
+  belongs_to :video_category
+
+  validates :title, :description, :video_category, :presence => true
   validates :duration, :numericality => {:only_integer => true}
 end
