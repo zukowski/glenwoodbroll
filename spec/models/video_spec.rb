@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Video do
   context 'validations' do
     it { should belong_to(:video_category) }
+    it { should have_and_belong_to_many(:video_collections) }
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:description) }
     it { should validate_presence_of(:video_category) }
