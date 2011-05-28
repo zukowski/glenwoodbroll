@@ -1,0 +1,8 @@
+<h2>Search</h2>
+  <%= form_tag videos_url do |f| %>
+  <%= label_tag "Category" %><br />
+  <%= select_tag :category_id, category_options %>
+  <%= label_tag "Keywords" %><br />
+  <%= text_field_tag :keywords %>
+  <%= submit_tag %>
+<% end %>
