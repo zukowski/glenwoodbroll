@@ -3,7 +3,7 @@ class Video < ActiveRecord::Base
   has_and_belongs_to_many :collections
 
   validates :title, :description, :category, :presence => true
-  validates :duration, :numericality => {:only_integer => true}
+  validates :duration, :numericality => {:only_integer => true}, :allow_nil => true
   
   mount_uploader :video, VideoUploader
  

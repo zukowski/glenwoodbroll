@@ -8,6 +8,7 @@ describe Video do
     it { should validate_presence_of(:description) }
     it { should validate_presence_of(:category) }
     it { should validate_numericality_of(:duration) }
+    it { should allow_value(nil).for(:duration) }
     it { should_not allow_value(5.5).for(:duration) }
   end
 
