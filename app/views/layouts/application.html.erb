@@ -14,6 +14,16 @@
       <div id="top-menu"></div>
       <div id="content-container">
         <div id="left">
+          <% if flash.notice %>
+            <div class="flash notice">
+              <%= flash.notice %>
+            </div>
+          <% end %>
+          <% if flash.alert %>
+            <div class="flast alert">
+              <%= flash.alert %>
+            </div>
+          <% end %>
           <%= yield %>
         </div>
         <div id="right">
