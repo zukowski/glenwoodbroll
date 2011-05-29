@@ -1,6 +1,6 @@
 module ApplicationHelper
   def category_options
-    [['foo',1],['bar',2]]
+    options_for_select [['foo',1],['bar',2]]
   end
 
   def render_shadow_box(id, content)
