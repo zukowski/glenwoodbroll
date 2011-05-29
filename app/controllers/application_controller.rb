@@ -11,4 +11,5 @@ class ApplicationController < ActionController::Base
       video_collection = VideoCollection.create(:user => current_user)
     end
   end
+
 end
