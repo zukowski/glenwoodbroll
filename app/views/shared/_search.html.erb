@@ -1,7 +1,7 @@
 <h2>Search</h2>
-  <%= form_tag videos_url do |f| %>
+  <%= form_tag videos_url, :method => :get do |f| %>
   <%= label_tag "Category" %><br />
-  <%= select_tag :category_id, category_options %>
+  <%= select_tag :category_id, options_for_select(Category.all.map {|c| [c.name,c.id]}) %>
   <%= label_tag "Keywords" %><br />
   <%= text_field_tag :keywords %>
   <%= submit_tag "Search Videos", :class => 'button' %>
