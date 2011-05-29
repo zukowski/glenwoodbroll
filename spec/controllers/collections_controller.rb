@@ -3,6 +3,17 @@ require 'spec_helper'
 describe CollectionsController do
   login_admin
 
+  context 'routes', :type => :routing do
+    it { get('/collections').should be_routable }
+    it { post('/collections').should be_routable }
+    it { delete('/collections/1').should be_routable }
+
+    it { get('/collections/1').should_not be_routable }
+    it { get('/collections/new').should_not be_routable }
+    it { get('/collections/1/edit').should_not be_routable }
+    it { put('/collections/1').should_not be_routable }
+  end
+
   context 'GET index' do
     it 'should render show' do
       get :index
@@ -13,22 +24,6 @@ describe CollectionsController do
       collections = [Factory(:collection), Factory(:collection)]
       get :index
       assigns(:collections).should == collections
-    end
-  end
-
-  context 'GET show' do
-    before :each do
-      @collection = Factory(:collection)
-    end
-
-    it 'should render show' do
-      get :show, :id => @collection.id
-      response.should render_template(:show)
-    end
-
-    it 'should assign @video with the selected record' do
-      get :show, :id => @collection.id
-      assigns(:collection).should == @collection
     end
   end
 

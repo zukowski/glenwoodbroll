@@ -3,6 +3,6 @@ Glenwoodbroll::Application.routes.draw do
   devise_for :users
 
   resources :videos
-  resources :collections, :except => [:new, :edit, :update]
+  resources :collections, :only => [:index, :create, :destroy]
   resources :categories, :except => [:show]
 end

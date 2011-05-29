@@ -1,2 +1,0 @@
-class VideoCategoriesController < ApplicationController
-end

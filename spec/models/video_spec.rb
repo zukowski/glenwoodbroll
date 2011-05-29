@@ -47,9 +47,9 @@ describe Video do
 
     context 'when a category and keywords are supplied' do
       it 'should only return videos with matching category and keywords' do
-        video1 = Factory(:video, :title => "One")
-        video2 = Factory(:video, :title => "One")
-        video3 = Factory(:video, :category => video2.category)
+        video1 = Factory(:video, :title => "One", :description => "One")
+        video2 = Factory(:video, :title => "One", :description => "One")
+        video3 = Factory(:video, :title => "Two", :description => "Two", :category => video2.category)
         Video.search({:category_id => video2.category.id, :keywords => "One"}).should == [video2]
       end
     end
