@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Category do
   context 'validations' do
+    it { should have_many(:videos) }
     it { should validate_presence_of(:name) }
     context 'uniqueness' do
       before { Factory(:category) }
