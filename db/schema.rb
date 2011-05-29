@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20110529053520) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "video_category_id"
+    t.string   "video"
   end
 
 end
