@@ -2,5 +2,5 @@ Glenwoodbroll::Application.routes.draw do
   root :to => "videos#index"
   devise_for :users
 
-  resources :videos, :only => [:index, :show]
+  resources :videos, :only => [:index, :show, :new, :create]
 end
