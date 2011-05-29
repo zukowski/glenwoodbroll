@@ -5,6 +5,7 @@ gem 'sqlite3'
 gem 'mysql2', '0.2.6'
 
 gem 'devise'
+gem 'cancan'
 
 group :test do
   gem 'rspec-rails', '2.6.0'
