@@ -10,3 +10,6 @@ Factory.define :user do |f|
   }
 end
 
+Factory.define :admin, :parent => :user do |f|
+  f.admin true
+end
