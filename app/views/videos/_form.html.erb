@@ -15,12 +15,13 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    <%= f.label :category %><br />
+    <%= f.collection_select :category_id, Category.all, :id, :name, :prompt => "Select a category" %><br />
+    <%= link_to 'New Category', new_category_path %>
   </div>
   <div class="field">
-    <%= f.label :duration %><br />
-    <%= f.text_field :duration %>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
   </div>
   <div class="actions">
     <%= f.submit %>

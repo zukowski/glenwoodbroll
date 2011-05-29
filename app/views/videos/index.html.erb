@@ -1,2 +1,10 @@
 <h1>Glenwood Spring Chamber B-Roll Video Library</h1>
-<%= link_to 'New Video', new_video_path %>
+<%= link_to 'New Video', new_video_path if can?(:create, Video) %>
+
+<% if @videos.any? %>
+  <ul>
+    <%= render @videos %>
+  </ul>
+<% else %>
+  <div>No Videos Found.</div>
+<% end %>
