@@ -1,0 +1,7 @@
+<h2>Collection</h2>
+<% current_collection.videos.each do |video| %>
+  <%= render 'shared/video', :locals => {:video => video} %>
+<% end %>
+<% if current_collection.empty? %>
+  No Videos Selected
+<% end %>

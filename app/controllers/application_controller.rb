@@ -1,8 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  helper_method :current_collection
+
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    if current_user
+      redirect_to root_url, :alert => exception.message
+    else
+      redirect_to new_user_session_url, :alert => exception.message
+    end
   end
 
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404

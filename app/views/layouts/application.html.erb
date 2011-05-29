@@ -21,15 +21,15 @@
           <% unless current_user %>
             <%= render_shadow_box('sign_in', render('shared/sign_in')) %>
           <% else %>
-            <%= render_shadow_box('video_collection') %>
+            <%= render_shadow_box('collection', render('shared/collection')) %>
           <% end %>
         </div>
         <div class="clear"></div>
       </div>
     </div>
     <div id="shadow-bottom">
-    	<%= render 'shared/footer' %>
-		</div>
+      <%= render 'shared/footer' %>
+    </div>
   </div>
 </div>
 </body>

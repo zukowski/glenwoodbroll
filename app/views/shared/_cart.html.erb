@@ -1,8 +1,0 @@
-<% shadow_box 'cart' do %>
-<h2>Shopping Cart</h2>
-<% current_video_collection.videos.each do |video| %>
-  <%= render 'shared/video', :locals => {:video => video} %>
-<% end %>
-<% if current_video_collection.empty? %>
-  No Videos Selected
-<% end %>
