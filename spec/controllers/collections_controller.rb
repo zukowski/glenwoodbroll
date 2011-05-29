@@ -7,6 +7,7 @@ describe CollectionsController do
     it { get('/collections').should be_routable }
     it { post('/collections').should be_routable }
     it { delete('/collections/1').should be_routable }
+    it { post('/collections/1').should be_routable }
 
     it { get('/collections/1').should_not be_routable }
     it { get('/collections/new').should_not be_routable }
@@ -24,6 +25,29 @@ describe CollectionsController do
       collections = [Factory(:collection), Factory(:collection)]
       get :index
       assigns(:collections).should == collections
+    end
+  end
+
+  context 'POST populate' do
+    before :each do
+      @collection = Factory(:collection)
+      @video = Factory(:video)
+      @request.env["HTTP_REFERER"] = root_url
+    end
+
+    it 'should add a video to the collection' do
+      post :populate, :id => @collection.id, :video_id => @video.id
+      @collection.reload.videos.should == [@video]
+    end
+
+    it 'should redirect to where we came from' do
+      post :populate, :id => @collection.id, :video_id => @video.id
+      response.should redirect_to(:back)
+    end
+
+    it 'should have a flash notice' do
+      post :populate, :id => @collection.id, :video_id => @video.id
+      flash.notice.should_not be_nil
     end
   end
 

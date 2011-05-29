@@ -4,6 +4,13 @@ class CollectionsController < ApplicationController
   def index
   end
 
+  def populate
+    @collection = Collection.find(params[:id])
+    @video = Video.find(params[:video_id])
+    @collection.videos << @video
+    redirect_to :back, :notice => "Video added to your collection."
+  end
+
   def create
     @collection.user = current_user
     if @collection.save
