@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
-  has_many :video_collections
+  has_many :collections
 
   def is_admin!
     self.update_attribute(:admin, true)

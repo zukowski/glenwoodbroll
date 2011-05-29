@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   context 'validations' do
-    it { should have_many(:video_collections) }
+    it { should have_many(:collections) }
     it { should validate_presence_of(:email) }
     it { should validate_presence_of(:password) }
     it { should allow_mass_assignment_of(:email) }

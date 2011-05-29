@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe VideoCollectionsController do
+describe CollectionsController do
   login_admin
 
   context 'GET index' do
@@ -9,16 +9,16 @@ describe VideoCollectionsController do
       response.should render_template(:index)
     end
 
-    it 'should assign @video_collections with all records' do
-      collections = [Factory(:video_collection), Factory(:video_collection)]
+    it 'should assign @collections with all records' do
+      collections = [Factory(:collection), Factory(:collection)]
       get :index
-      assigns(:video_collections).should == collections
+      assigns(:collections).should == collections
     end
   end
 
   context 'GET show' do
     before :each do
-      @collection = Factory(:video_collection)
+      @collection = Factory(:collection)
     end
 
     it 'should render show' do
@@ -28,27 +28,27 @@ describe VideoCollectionsController do
 
     it 'should assign @video with the selected record' do
       get :show, :id => @collection.id
-      assigns(:video_collection).should == @collection
+      assigns(:collection).should == @collection
     end
   end
 
   context 'POST create' do
     before :each do
-      @video_collection = VideoCollection.new
-      VideoCollection.stub(:new => @video_collection)
+      @collection = Collection.new
+      Collection.stub(:new => @collection)
     end
 
     context 'when validation passes' do
-      before(:each) { @video_collection.stub(:valid? => true) }
+      before(:each) { @collection.stub(:valid? => true) }
 
       it 'should save the record' do
         post :create
-        assigns(:video_collection).should_not be_new_record
+        assigns(:collection).should_not be_new_record
       end
 
       it 'should assign the current user to the collection' do
         post :create
-        assigns(:video_collection).user.should == @admin
+        assigns(:collection).user.should == @admin
       end
 
       it 'should redirect to the videos' do
@@ -65,15 +65,15 @@ describe VideoCollectionsController do
     end
     
     context 'when validation fails' do
-      before(:each) { @video_collection.stub(:valid? => false) }
+      before(:each) { @collection.stub(:valid? => false) }
       it 'should not save the record' do
         post :create
-        assigns(:video_collection).should be_new_record
+        assigns(:collection).should be_new_record
       end
 
       it 'should render new' do
         post :create
-        response.should redirect_to(VideoCollection)
+        response.should redirect_to(Collection)
       end
 
       it 'should have a flash error' do
@@ -87,12 +87,12 @@ describe VideoCollectionsController do
 
   context 'DELETE destroy' do
     before :each do
-      @collection = Factory(:video_collection)
+      @collection = Factory(:collection)
     end
 
     it 'should destroy the collection' do
       delete :destroy, :id => @collection.id
-      VideoCollection.find_by_id(@collection.id).should be_nil
+      Collection.find_by_id(@collection.id).should be_nil
     end
 
     it 'should have a flash notice' do
@@ -102,7 +102,7 @@ describe VideoCollectionsController do
 
     it 'should redirect to the index' do
       delete :destroy, :id => @collection.id
-      response.should redirect_to(VideoCollection)
+      response.should redirect_to(Collection)
     end
   end
 end

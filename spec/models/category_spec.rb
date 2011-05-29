@@ -1,15 +1,15 @@
 require 'spec_helper'
 
-describe VideoCategory do
+describe Category do
   context 'validations' do
     it { should validate_presence_of(:name) }
     context 'uniqueness' do
-      before { Factory(:video_category) }
+      before { Factory(:category) }
       it { should validate_uniqueness_of(:name) }
     end
   end
 
   context 'factory' do
-    it { should have_valid_factory(:video_category) }
+    it { should have_valid_factory(:category) }
   end
 end

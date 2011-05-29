@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe Video do
   context 'validations' do
-    it { should belong_to(:video_category) }
-    it { should have_and_belong_to_many(:video_collections) }
+    it { should belong_to(:category) }
+    it { should have_and_belong_to_many(:collections) }
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:description) }
-    it { should validate_presence_of(:video_category) }
+    it { should validate_presence_of(:category) }
     it { should validate_numericality_of(:duration) }
     it { should_not allow_value(5.5).for(:duration) }
   end
@@ -41,7 +41,7 @@ describe Video do
       it 'should limit the videos to that category' do
         video1 = Factory(:video)
         video2 = Factory(:video)
-        Video.search({:category_id => video2.video_category.id}).should == [video2]
+        Video.search({:category_id => video2.category.id}).should == [video2]
       end
     end
 
@@ -49,8 +49,8 @@ describe Video do
       it 'should only return videos with matching category and keywords' do
         video1 = Factory(:video, :title => "One")
         video2 = Factory(:video, :title => "One")
-        video3 = Factory(:video, :video_category => video2.video_category)
-        Video.search({:category_id => video2.video_category.id, :keywords => "One"}).should == [video2]
+        video3 = Factory(:video, :category => video2.category)
+        Video.search({:category_id => video2.category.id, :keywords => "One"}).should == [video2]
       end
     end
   end

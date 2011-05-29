@@ -9,13 +9,13 @@ describe Ability do
     @admin_ability = Ability.new(@admin)
     @user_ability = Ability.new(@user)
     @video = Factory(:video)
-    @video_category = @video.video_category
-    @admin_video_collection = Factory(:video_collection, :user => @admin)
-    @user_video_collection = Factory(:video_collection, :user => @user)
+    @video_category = @video.category
+    @admin_collection = Factory(:collection, :user => @admin)
+    @user_collection = Factory(:collection, :user => @user)
   end
 
   after :all do
-    [User,Video,VideoCollection,VideoCategory].each(&:destroy_all)
+    [User,Video,Collection,Category].each(&:destroy_all)
   end
 
   context 'admin' do
@@ -47,7 +47,7 @@ describe Ability do
       end
     end
 
-    context 'VideoCategory' do
+    context 'Category' do
       context 'should be able to' do
         it 'should be able to see video categories' do
           @user_ability.should be_able_to(:read, @video_category)
@@ -56,7 +56,7 @@ describe Ability do
 
       context 'should not be able to' do
         it 'create video categories' do
-          @user_ability.should_not be_able_to(:create, VideoCategory)
+          @user_ability.should_not be_able_to(:create, Category)
         end
 
         it 'update video categories' do
@@ -69,36 +69,36 @@ describe Ability do
       end
     end
 
-    context 'VideoCollection' do
+    context 'Collection' do
       context 'should be able to' do
         it 'read their own video collections' do
-          @user_ability.should be_able_to(:read, @user_video_collection)
+          @user_ability.should be_able_to(:read, @user_collection)
         end
 
         it 'create a video collection' do
-          @user_ability.should be_able_to(:create, VideoCollection)
+          @user_ability.should be_able_to(:create, Collection)
         end
 
         it 'update their own video collection' do
-          @user_ability.should be_able_to(:update, @user_video_collection)
+          @user_ability.should be_able_to(:update, @user_collection)
         end
 
         it 'destroy their own video collections' do
-          @user_ability.should be_able_to(:destroy, @user_video_collection)
+          @user_ability.should be_able_to(:destroy, @user_collection)
         end
       end
 
       context 'should not be able to' do
-        it 'read the video collections of others' do
-          @user_ability.should_not be_able_to(:read, @admin_video_collection)
+        it 'read the collections of others' do
+          @user_ability.should_not be_able_to(:read, @admin_collection)
         end
 
-        it 'update the video collections of others' do
-          @user_ability.should_not be_able_to(:update, @admin_video_collection)
+        it 'update the collections of others' do
+          @user_ability.should_not be_able_to(:update, @admin_collection)
         end
 
-        it 'destroy the video collections of others' do
-          @user_ability.should_not be_able_to(:destroy, @admin_video_collection)
+        it 'destroy the collections of others' do
+          @user_ability.should_not be_able_to(:destroy, @admin_collection)
         end
       end
     end
