@@ -6,12 +6,19 @@ describe VideosController do
   context 'GET index' do
     it 'assigns @videos' do
       get :index
-      assigns(:videos).should eq([video])
+      assigns(:videos).should == [video]
     end
 
     it 'renders the index template' do
       get :index
       response.should render_template(:index)
+    end
+
+    context 'with search params' do
+      it 'should call search with the right params' do
+        Video.should_receive(:search).with({'category_id' => '1', 'keywords' => 'One'})
+        get :index, 'category_id' => '1', 'keywords' => 'One'
+      end
     end
   end
 

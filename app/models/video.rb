@@ -8,4 +8,11 @@ class Video < ActiveRecord::Base
   
   mount_uploader :video, VideoUploader
  
+  def self.search(params)
+    results = scoped
+    results = results.where('title LIKE ? OR description LIKE ?', "%#{params[:keywords]}%", "%#{params[:keywords]}%")
+    results = results.where(:video_category_id => params[:category_id]) unless params[:category_id].blank?
+    results
+  end
+  
 end

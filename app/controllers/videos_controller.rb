@@ -1,6 +1,6 @@
 class VideosController < ApplicationController
   def index
-    @videos = Video.all
+    @videos = Video.search(search_params)
   end
 
   def show
@@ -33,5 +33,9 @@ class VideosController < ApplicationController
 			end
 		end
 	end
-  
+
+  def search_params
+    params.select {|k,v| ['category_id','keywords'].include?(k)}
+  end
+
 end
