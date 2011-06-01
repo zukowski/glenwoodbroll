@@ -7,7 +7,7 @@ class CollectionsController < ApplicationController
   def populate
     @collection = Collection.find(params[:id])
     @video = Video.find(params[:video_id])
-    @collection.videos << @video
+    @collection << @video
     redirect_to :back, :notice => "Video added to your collection."
   end
 
