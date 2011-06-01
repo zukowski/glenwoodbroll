@@ -1,8 +1,9 @@
 <div id="header">
   <div id="header-menu">
     <ul>
-      <li><%= link_to 'Videos', Video %></li>
-      <li><%= link_to 'Categories', Category %></li>
+      <li><%= link_to 'Videos', Video if can?(:read, Video) %></li>
+      <li><%= link_to 'Categories', Category if can?(:read, Category) %></li>
+      <li><%= link_to 'Sign Out', destroy_user_session_path if current_user %></li>
     </ul>
   </div>
 </div>

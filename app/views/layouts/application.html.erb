@@ -27,10 +27,8 @@
           <%= yield %>
         </div>
         <div id="right">
-          <%= render_shadow_box('search', render('shared/search')) %>
-          <% unless current_user %>
-            <%= render_shadow_box('sign_in', render('shared/sign_in')) %>
-          <% else %>
+          <% if can?(:read, Video) %>
+            <%= render_shadow_box('search', render('shared/search')) %>
             <%= render_shadow_box('collection', render('shared/collection')) %>
           <% end %>
         </div>

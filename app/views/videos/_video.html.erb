@@ -1,5 +1,5 @@
 <li>
-  <h2><%= video.title %></h2>
+  <h2><%= link_to video.title, video_path(video) %></h2>
   <%= content_tag(:div, {:class => 'edit-video'}) do %>
     <%= link_to 'Edit Video', edit_video_path(video), :class => 'button' %>
   <% end if can?(:edit, video) %>

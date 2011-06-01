@@ -1,5 +1,5 @@
-<%= link_to 'Create Category', new_category_url %>
-<table>
+<%= link_to 'New Category', new_category_path, :class => 'button' %>
+<table width="100%">
   <thead>
     <tr>
       <th>Name</th>
@@ -12,7 +12,10 @@
       <tr>
         <td><%= category.name %></td>
         <td><%= category.videos.count %></td>
-        <td><%= link_to 'Edit', edit_category_url(category) %> <%= button_to 'Remove', category_url(category), :method => :delete %></td>
+        <td>
+          <%= link_to 'Edit', edit_category_url(category), :class => 'button', :style => 'display:inline;' %>
+          <%= button_to 'Remove', category_url(category), :method => :delete, :class => 'button' %>
+        </td>
       </tr>
     <% end %>
   </tbody>

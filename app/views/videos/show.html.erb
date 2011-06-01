@@ -3,3 +3,4 @@
 <div class="created_at">Posted: <%= time_ago_in_words(@video.created_at) %> ago</div>
 <div class="duration">Duration: <%= @video.duration || "N/A" %></div>
 <p><%= @video.description %></p>
+<%= link_to 'Back', :back, :class => 'button' %>
