@@ -3,6 +3,7 @@
   <%= content_tag(:div, {:class => 'edit-video'}) do %>
     <%= link_to 'Edit Video', edit_video_path(video), :class => 'button' %>
   <% end if can?(:edit, video) %>
+  <%= link_to_populate(video) %>
   <div class="created-at">Posted <%= time_ago_in_words(video.created_at) %> ago</div>
   <div class="duration">Duration: <%= video.duration || 'N/A' %></div>
   <p><%= video.description %></h2>

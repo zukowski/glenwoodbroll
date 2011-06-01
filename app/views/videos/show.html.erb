@@ -1,5 +1,5 @@
 <h2><%= @video.title %></h2>
-<div class="add_to_collection"><%= link_to "Add to collection", populate_collection_url(current_collection)  %></div>
+<div class="add_to_collection"><%= link_to_populate(video) %></div>
 <div class="created_at">Posted: <%= time_ago_in_words(@video.created_at) %> ago</div>
 <div class="duration">Duration: <%= @video.duration || "N/A" %></div>
 <p><%= @video.description %></p>
