@@ -1,5 +1,6 @@
 Factory.define :collection do |f|
   f.user { Factory(:user) }
+  f.name { Faker::Lorem.words(3) }
 end
 
 Factory.define :collection_with_videos, :parent => :collection do |f|

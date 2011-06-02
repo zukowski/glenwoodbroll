@@ -5,6 +5,7 @@ describe Collection do
     it { should belong_to(:user) }
     it { should have_and_belong_to_many(:videos) }
     it { should validate_presence_of(:user) }
+    it { should validate_presence_of(:name) }
     context 'uniqueness' do
       before :each do
         @collection = Factory(:collection)

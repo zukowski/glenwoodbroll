@@ -4,7 +4,7 @@ class Collection < ActiveRecord::Base
 
   delegate :empty?, :to => :videos
 
-  validates :user, :presence => true
+  validates :user, :name, :presence => true
 
   def <<(video)
     videos << video unless videos.include?(video)

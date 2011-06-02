@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :current_collection
+  helper_method :current_collection=
 
   rescue_from CanCan::AccessDenied do |exception|
     if current_user
@@ -18,7 +19,17 @@ class ApplicationController < ActionController::Base
   end
 
   def current_collection
-    collection = Collection.find_by_id(session[:cid]) || current_user.collections.first
-    collection ||= Collection.create(:user => current_user)
+    return @current_collection if @current_collection
+    @current_collection = current_user.collections.where(:id => session[:cid]).first
+    Rails.logger.debug(@current_collection.nil?)
+    if @current_collection.nil?
+      unless current_user.collections.first.nil?
+        @current_collection = current_user.collections.first
+      else
+        @current_collection = Collection.create(:user => current_user, :name => 'New Reel')
+      end
+      session[:cid] = @current_collection.id
+    end
+    @current_collection
   end
 end
