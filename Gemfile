@@ -8,6 +8,8 @@ gem 'devise'
 gem 'cancan'
 gem 'carrierwave'
 
+gem 'jquery-rails'
+
 group :test do
   gem 'rspec-rails', '2.6.0'
   gem 'shoulda'
