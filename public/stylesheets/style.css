@@ -1,8 +1,13 @@
 body { margin:0; padding:0; font-family:garamond; }
 h1 { color:#AA4B09; font-size:26px; margin-top:5px;}
 h2, h2 a { color:#AA4B09; font-size:20px; margin:0 0 10px 0; }
+a { color: #17637A; }
 .small { font-size:12px; }
 div.clear { clear:both; }
+.left { float:left; margin-right:10px; }
+.right { float:right; margin-left:10px; }
+
+span.tiny-header { font-style:italic; color:#444; font-size:11px; font-family:georgia; display:block;}
 
 div#shadow-left {
 	width:914px;
@@ -69,14 +74,14 @@ div#top-menu {
 
 div#left {
 	float:left;
-	width:620px;
-	margin:15px;
+	width:625px;
+	margin:15px 5px 15px 15px;
 }
 
 div#right {
 	float:left;
-	width:230px;
-	margin:10px;
+	width:235px;
+	margin:15px 15px 15px 5px;
 }
 
 div#content-container {
@@ -102,7 +107,7 @@ div.shadow-box .tr { z-index:2; width:10px; height:10px; position:absolute; top:
 div.shadow-box .br { z-index:2; width:10px; height:10px; position:absolute; bottom:0; right:0; background:url(../images/shadow-box-br.png) top left no-repeat; }
 div.shadow-box .bl { z-index:2; width:10px; height:10px; position:absolute; bottom:0; left:0; background:url(../images/shadow-box-bl.png) top left no-repeat; }
 
-/* Search */
+/* Show Videos */
 div#search-container {
 	background:#f6f6f6;
 }
@@ -145,7 +150,6 @@ div.preview iframe {
 }
 
 table.video-info {
-	width:100%;
 	font-size:14px;
 }
 
@@ -153,7 +157,113 @@ table.video-info td.label {
 	font-weight:bold;
 }
 
-/* Shopping Cart Sidebar */
+ul.video-list {
+	margin:15px 0;
+	padding:0;
+	list-style:none;
+}
+
+ul.video-list h2 a.title {
+	font-size:16px;
+}
+
+ul.video-list li {
+	position:relative;
+}
+
+ul.video-list li div.video-preview {
+	float:left;
+	width:250px;
+	height:170px;
+	background:#fff;
+	border:1px solid #ccc;
+	margin:10px 10px 0 0;
+}
+
+ul.video-list div.actions {
+	position:absolute;
+	top:10px; right:10px;
+}
+
+ul.video-list div.actions a,
+ul.video-list div.actions form {
+	float:right;
+	margin-left:10px;
+}
+
+/* Edit Videos */
+div.actions {
+	margin-top:8px;
+}
+
+/* My Reels Sidebar */
+span.reel {
+	font-size:14px;
+	width:130px;
+	line-height:20px;
+	display:block;
+	margin:4px 0;
+	padding:0 30px;
+	background:url(/images/reel.png) left center no-repeat;
+}
+
+div#current-reel {
+	position:relative;
+	color:#fff;
+	background:#499bb5;
+	padding:5px;
+	margin-bottom:10px;
+}
+
+div#current-reel span {
+	color:#eeeeff;
+}
+
+div#current-reel span.reel {
+	color:#fff;
+	display:block;
+	font-weight:bold;
+	position:relative;
+}
+
+div#current-reel{
+	padding-bottom:10px;
+}
+
+div#current-reel .videos {
+	margin-top:10px;
+}
+
+div#current-reel .actions {
+	font-size:12px;
+	color:#eeeeff;
+	position:absolute;
+	right:6px;
+	top:-1px;
+	padding:0;
+	margin:0;
+}
+
+div#current-reel .actions a {
+	color:#eee;
+	font-size:11px;
+	font-family:arial;
+	font-weight:normal;
+}
+
+div#current-reel input {
+	margin-top:4px;
+}
+
+div#current-reel span.video {
+	display:block;
+	padding-left:26px;
+	background:url(/images/video.png) 3px top no-repeat;
+	font-size:12px;
+	color:#fff;
+	margin-top:6px;
+}
+
 div.sidebar-cart-line-item {
 	margin-bottom:8px;
 }
@@ -184,24 +294,71 @@ div.sidebar-cart-line-item a.remove {
 	color:#0000ff;
 }
 
+/* Admin */
+div.admin-toolbar {
+	padding:4px 8px;
+	border-top:2px solid rgb(63,145,171);
+	border-bottom:2px solid rgb(63,145,171);
+	background:rgb(73,155,181);
+}
+
 /* Buttons & form elements */
-a.button {
+.button, a.button,
+#user_submit, #collection_submit {
+	display:block;
+	text-align:center;
+	width:60px;
 	text-decoration:none;
-	color: #FFFFFF;
+	color: #222;
 	cursor: pointer;
 	font-family:arial;
-	font-weight: bold;
-	height: 32px;
+	font-weight: normal;
 	font-size:12px;
-	padding: 7px 8px 7px 8px;
+	height:24px;
+	line-height:25px;
+	padding:0 8px;
+	background:#e2e2e2;
+	border:1px solid #aaa;
+	border-radius: 3px;
+}
+input.button {
+	height:26px;
+	width:78px;
+	line-height:21px;
+	vertical-align:top;
 }
 
-a.button.add-to-cart {
-	height:20px;
-	padding:3px 6px;
+.button:hover, a.button:hover,
+#user_submit:hover, #collection_submit:hover {
+	color:#555;
+	border:1px solid #bbb;
+}	
+
+input.add-to-reel {
+	width:100px;
+	white-space:nowrap;
+	padding:3px 6px 3px 25px;
+	text-align:left;
+	background:#e2e2e2 url(/images/add-to-reel.png) 4px center no-repeat;
 }
 
-button, .button, .form-submit {
+a.edit {
+	width:22px;
+	white-space:nowrap;
+	text-align:left;
+	padding-left:27px;
+	background:#e2e2e2 url(/images/edit.png) 4px center no-repeat;
+}
+
+a.new {
+	width:58px;
+	white-space:nowrap;
+	text-align:left;
+	padding-left:27px;
+	background:#e2e2e2 url(/images/new-video.png) 4px center no-repeat;
+}
+
+.button.large, .form-submit {
 	background: none repeat scroll 0 0 #08586E;
 	border: 2px solid #59B6D2;
 	border-radius: 4px 4px 4px 4px;
@@ -210,11 +367,12 @@ button, .button, .form-submit {
 	font-weight: bold;
 	font-size:12px;
 	height: 32px;
+	width:100px;
 	padding: 4px 8px 6px 8px;
 	margin-top:10px;
 }
 
-button:hover, .button:hover, .form-submit:hover {
+.button.large:hover, .form-submit:hover {
 	background: none repeat scroll 0 0 #096A84;
 	border: 2px solid #5ED6FA;
 	border-radius: 4px 4px 4px 4px;
@@ -227,7 +385,7 @@ input {
 }
 
 select {
-	width:160px;
+	width:170px;
 	margin-bottom:10px;
 }
 
@@ -242,3 +400,27 @@ select {
 .field_with_errors input, .field_with_errors textarea, .field_with_errors select {
     border-color: red;
 }
+
+/* Flash Messages */
+div.flash {
+	padding:10px 15px 10px 45px;
+	font-family:arial;
+	font-size:16px;
+	font-weight:bold;
+	margin-bottom:10px;
+}
+
+div.flash.alert {
+	color:#aa0000;
+	border-top:2px solid #990000;
+	border-bottom:2px solid #990000;
+	background:#ffeeee url(/images/error.png) 10px center no-repeat;
+}
+
+div.flash.notice {
+	color:#55aa11;
+	border-top:2px solid #339911;
+	border-bottom:2px solid #339911;
+	background:#f3fff3 url(/images/green-check.png) 10px center no-repeat;
+}
+

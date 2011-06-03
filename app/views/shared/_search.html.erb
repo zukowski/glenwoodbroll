@@ -3,6 +3,6 @@
   <%= label_tag "Category" %><br />
   <%= select_tag :category_id, options_for_select(Category.all.map {|c| [c.name,c.id]}) %>
   <%= label_tag "Keywords" %><br />
-  <%= text_field_tag :keywords %>
-  <%= submit_tag "Search Videos", :class => 'button' %>
+  <%= text_field_tag :keywords, '', :size => 22 %>
+  <%= submit_tag "Search Videos", :class => 'button large' %>
 <% end %>

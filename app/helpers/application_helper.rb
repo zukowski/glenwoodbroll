@@ -9,7 +9,7 @@ module ApplicationHelper
 
   def link_to_populate(video)
     if current_collection
-      button_to('Add To Reel', populate_collection_path(current_collection, :video_id => video.id), :method => :post, :class => 'button')
+      button_to('Add To Reel', populate_collection_path(current_collection, :video_id => video.id), :method => :post, :class => 'button add-to-reel')
     end
   end
 end

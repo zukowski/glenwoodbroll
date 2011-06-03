@@ -1,5 +1,9 @@
-<h1>Glenwood Springs Chamber B-Roll Video Library</h1>
-<%= link_to('New Video', new_video_path, :class => 'button') if can?(:create, Video) %>
+<h1>GSCRA B-Roll Library</h1>
+<% if can?(:create, Video) %>
+<div class="admin-toolbar">
+<%= link_to('New Video', new_video_path, :class => 'button new')  %>
+</div>
+<% end %>
 
 <% if @videos.any? %>
   <ul class="video-list">

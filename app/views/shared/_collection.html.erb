@@ -1,14 +1,26 @@
-<h2>My Reels</h2>
+<h2>My Video Reels</h2>
 <div id="current_collection">
-  Current: <span class="label"><%= current_collection.name %> <%= link_to 'Edit', '#' %></span>
-  <%= form_for(current_collection, :html => {:style => 'display:none;'}) do |f| %>
-    <%= f.text_field :name %>
-    <%= f.submit 'Update' %>
-  <% end %>
+	<div id="current-reel">
+  	<span class="tiny-header">Current Reel</span><span class="label reel"><%= current_collection.name %><div class="actions"><%= link_to 'Edit', '#' %></div></span>
+  	<%= form_for(current_collection, :html => {:style => 'display:none;'}) do |f| %>
+    	<%= f.text_field :name, :size => 22 %>
+    	<%= f.submit 'Update' %>
+  	<% end %>
+  	<div class="clear"></div> 
+  	<div class="videos">
+  		<span class="tiny-header">Videos</span>
+			<% current_collection.videos.each do |video| %>
+				<span class="video"><%= video.title %></span>
+			<% end %>
+			<% if current_collection.empty? %>
+				No Videos Selected
+			<% end %>
+		</div>
+  </div>
 </div>
 
 <%= form_for(Collection.new) do |f| %>
-  <%= f.text_field :name %>
+  <%= f.text_field :name, :size => 22 %>
   <%= f.submit 'Create Reel', :class => 'button' %>
 <% end %>
 
@@ -17,11 +29,4 @@
     <%= collection_select :collection, :id, current_user.collections.reject {|c| c == current_collection}, :id, :name %>
     <%= submit_tag 'Switch', :class => 'button' %>
   <% end %>
-<% end %>
-
-<% current_collection.videos.each do |video| %>
-  <%= video.title %>
-<% end %>
-<% if current_collection.empty? %>
-  No Videos Selected
 <% end %>
