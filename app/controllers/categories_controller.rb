@@ -21,4 +21,9 @@ class CategoriesController < ApplicationController
     @category.destroy
     redirect_to Category, :notice => "Category removed."
   end
+  
+  def index
+  	@categories = Category.all(:order => 'name ASC')
+  end
+  
 end

@@ -18,15 +18,17 @@
 		</div>
   </div>
 </div>
+<a class="button large" style="width:173px;font-size:14px;height:25px;">Build Reel for Download</a> 
 
-<%= form_for(Collection.new) do |f| %>
-  <%= f.text_field :name, :size => 22 %>
-  <%= f.submit 'Create Reel', :class => 'button' %>
-<% end %>
-
+<h4>Switch Reels</h4>
 <% if current_user.collections.count > 1 %>
   <%= form_tag(switch_collections_path, :method => :post) do |f| %>
     <%= collection_select :collection, :id, current_user.collections.reject {|c| c == current_collection}, :id, :name %>
-    <%= submit_tag 'Switch', :class => 'button' %>
   <% end %>
+<% end %>
+
+<h4>Create New Reel</h4>
+<%= form_for(Collection.new) do |f| %>
+  <%= f.text_field :name, :size => 22 %>
+  <%= f.submit 'Create', :class => 'button', :style => 'margin-top:6px;' %>
 <% end %>

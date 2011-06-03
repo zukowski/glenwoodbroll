@@ -1,5 +1,10 @@
-<%= link_to 'New Category', new_category_path, :class => 'button' %>
-<table width="100%">
+<h1>Video Categories</h1>
+<% if can?(:create, Category) %>
+<div class="admin-toolbar">
+<%= link_to 'New Category', new_category_path, :class => 'button new long' %>
+</div>
+<% end %>
+<table class="list" width="100%" style="margin-top:10px;" cellpadding="0" cellspacing="0">
   <thead>
     <tr>
       <th>Name</th>
@@ -8,15 +13,19 @@
     </tr>
   </thead>
   <tbody>
+  	<% count = 0; %>
     <% @categories.each do |category| %>
-      <tr>
+      <tr class="<%= count % 2 == 0 ? 'even' : 'odd' %>">
         <td><%= category.name %></td>
         <td><%= category.videos.count %></td>
         <td>
-          <%= link_to 'Edit', edit_category_url(category), :class => 'button', :style => 'display:inline;' %>
-          <%= button_to 'Remove', category_url(category), :method => :delete, :class => 'button' %>
+        	<div style="float:right; width:200px;">
+          <%= link_to 'Edit', edit_category_url(category), :class => 'button right edit' %>
+          <%= button_to 'Remove', category_url(category), :method => :delete, :class => 'button right delete' %>
+        	</div>
         </td>
       </tr>
+      <% count += 1 %>
     <% end %>
   </tbody>
 </table>
