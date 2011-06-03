@@ -1,18 +1,25 @@
 require 'spec_helper'
 
+def set_referer
+  before :each do
+    @request.env["HTTP_REFERER"] = root_url
+  end
+end
+
 describe CollectionsController do
   login_admin
 
   context 'routes', :type => :routing do
     it { get('/collections').should be_routable }
     it { post('/collections').should be_routable }
+    it { post('/collections/1/populate').should be_routable }
+    it { post('/collections/1/depopulate').should be_routable }
     it { delete('/collections/1').should be_routable }
-    it { post('/collections/1').should be_routable }
+    it { put('/collections/1').should be_routable }
 
     it { get('/collections/1').should_not be_routable }
     it { get('/collections/new').should_not be_routable }
     it { get('/collections/1/edit').should_not be_routable }
-    it { put('/collections/1').should_not be_routable }
   end
 
   context 'GET index' do
@@ -29,10 +36,10 @@ describe CollectionsController do
   end
 
   context 'POST populate' do
+    set_referer
     before :each do
       @collection = Factory(:collection)
       @video = Factory(:video)
-      @request.env["HTTP_REFERER"] = root_url
     end
 
     it 'should add a video to the collection' do
@@ -51,7 +58,32 @@ describe CollectionsController do
     end
   end
 
+  context 'POST depopulate' do
+    set_referer
+    before :each do
+      @collection = Factory(:collection)
+      @video = Factory(:video)
+      @collection << @video
+    end
+
+    it 'should remove a video from the collection' do
+      post :depopulate, :id => @collection.id, :video_id => @video.id
+      @collection.reload.videos.should be_empty
+    end
+
+    it 'should redirect to where it came from' do
+      post :depopulate, :id => @collection.id, :video_id => @video.id
+      response.should redirect_to(:back)
+    end
+
+    it 'should have a flash notice' do
+      post :depopulate, :id => @collection.id, :video_id => @video.id
+      flash.notice.should_not be_nil
+    end
+  end
+
   context 'POST create' do
+    set_referer
     before :each do
       @collection = Collection.new
       Collection.stub(:new => @collection)
@@ -90,14 +122,14 @@ describe CollectionsController do
         assigns(:collection).should be_new_record
       end
 
-      it 'should render new' do
+      it 'redirect to where it came from' do
         post :create
-        response.should redirect_to(Collection)
+        response.should redirect_to(:back)
       end
 
-      it 'should have a flash error' do
+      it 'should have a flash alert' do
         post :create
-        flash[:error].should_not be_nil
+        flash.alert.should_not be_nil
       end
 
       it 'should not change the current collection'
