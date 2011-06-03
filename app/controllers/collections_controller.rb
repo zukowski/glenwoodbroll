@@ -5,10 +5,15 @@ class CollectionsController < ApplicationController
   end
 
   def populate
-    @collection = Collection.find(params[:id])
     @video = Video.find(params[:video_id])
     @collection << @video
     redirect_to :back, :notice => "Video added to your reel."
+  end
+
+  def depopulate
+    @video = Video.find(params[:video_id])
+    @collection.videos = @collection.videos.reject {|v| v.id == params[:video_id]}
+    redirect_to :back, :notice => "Video removed from your reel."
   end
 
   def switch
