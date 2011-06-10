@@ -1,0 +1,15 @@
+<h1>Build your Reel</h1>
+
+<%= form_for @collection, :url => build_collection_url(@collection) do |f| %>
+  <h2>Select a video format</h2>
+  <%= select_tag :format, options_for_select(Video.encoding_options) %>
+
+  <h2>Your Videos</h2>
+  <ul>
+    <% @collection.videos.each do |video| %>
+      <li><%= video.title %></li>
+    <% end %>
+  </ul>
+
+  <%= f.submit "Build" %>
+<% end %>

@@ -13,5 +13,8 @@ class Video < ActiveRecord::Base
     results = results.where(:category_id => params[:category_id]) unless params[:category_id].blank?
     results
   end
-  
+
+  def self.encoding_options
+    [['avi', 'avi'],['mp4','mp4']]
+  end
 end

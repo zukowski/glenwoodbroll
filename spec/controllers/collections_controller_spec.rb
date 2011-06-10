@@ -16,6 +16,8 @@ describe CollectionsController do
     it { post('/collections/1/depopulate').should be_routable }
     it { delete('/collections/1').should be_routable }
     it { put('/collections/1').should be_routable }
+    it { get('/collections/1/show_build').should be_routable }
+    it { post('/collections/1/build').should be_routable }
 
     it { get('/collections/1').should_not be_routable }
     it { get('/collections/new').should_not be_routable }
@@ -33,6 +35,22 @@ describe CollectionsController do
       get :index
       assigns(:collections).should == collections
     end
+  end
+
+  context 'GET show_build' do
+    before(:each) { @collection = Factory(:collection) }
+    it 'should show the build page for a collection' do
+      get :show_build, :id => @collection
+      response.should render_template(:show_build)
+    end
+
+    it 'should provide the collection to the view' do
+      get :show_build, :id => @collection
+      assigns[:collection].should == @collection
+    end
+  end
+
+  context 'POST build' do
   end
 
   context 'POST populate' do
@@ -112,7 +130,10 @@ describe CollectionsController do
         flash[:notice].should_not be_nil
       end
 
-      it 'should set the current collection to the one created'
+      it 'should set the current collection to the one created' do
+        post :create
+        session[:cid].should == assigns(:collection).id
+      end
     end
     
     context 'when validation fails' do
@@ -132,7 +153,10 @@ describe CollectionsController do
         flash.alert.should_not be_nil
       end
 
-      it 'should not change the current collection'
+      it 'should not change the current collection' do
+        post :create
+        session[:cid].should be_nil
+      end
     end
   end
 

@@ -4,8 +4,12 @@ Glenwoodbroll::Application.routes.draw do
 
   resources :videos
   resources :collections, :only => [:index, :create, :update, :destroy] do
-    post :populate, :on => :member
-    post :depopulate, :on => :member
+    member do
+      post :populate
+      post :depopulate
+      get :show_build
+      post :build
+    end
     post :switch, :on => :collection
   end
   resources :categories, :except => [:show]

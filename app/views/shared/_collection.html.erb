@@ -1,24 +1,28 @@
 <h2>My Video Reels</h2>
 <div id="current_collection">
-	<div id="current-reel">
-  	<span class="tiny-header">Current Reel</span><span class="label reel"><%= current_collection.name %><div class="actions"><%= link_to 'Edit', '#' %></div></span>
-  	<%= form_for(current_collection, :html => {:style => 'display:none;'}) do |f| %>
-    	<%= f.text_field :name, :size => 22 %>
-    	<%= f.submit 'Update' %>
-  	<% end %>
-  	<div class="clear"></div> 
-  	<div class="videos">
-  		<span class="tiny-header">Videos</span>
-			<% current_collection.videos.each do |video| %>
-				<span class="video"><%= video.title %></span>
-			<% end %>
-			<% if current_collection.empty? %>
-				No Videos Selected
-			<% end %>
-		</div>
+  <div id="current-reel">
+    <span class="tiny-header">Current Reel</span>
+    <span class="label reel">
+      <%= current_collection.name %>
+      <div class="actions"><%= link_to 'Edit', '#' %></div>
+    </span>
+    <%= form_for(current_collection, :html => {:style => 'display:none;'}) do |f| %>
+      <%= f.text_field :name, :size => 22 %>
+      <%= f.submit 'Update' %>
+    <% end %>
+    <div class="clear"></div> 
+    <div class="videos">
+      <span class="tiny-header">Videos</span>
+      <% current_collection.videos.each do |video| %>
+        <span class="video"><%= video.title %></span>
+      <% end %>
+      <% if current_collection.empty? %>
+        No Videos Selected
+      <% end %>
+    </div>
   </div>
 </div>
-<a class="button large" style="width:173px;font-size:14px;height:25px;">Build Reel for Download</a> 
+<%= link_to "Build Reel for Download", show_build_collection_path(current_collection), :class => 'button large', :style => 'width:173px;font-size:14px;height:25px;' %>
 
 <h4>Switch Reels</h4>
 <% if current_user.collections.count > 1 %>

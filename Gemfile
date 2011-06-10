@@ -11,13 +11,10 @@ gem 'carrierwave'
 gem 'jquery-rails'
 
 group :test do
+  gem 'factory_girl_rails', :require => false
   gem 'rspec-rails', '2.6.0'
   gem 'shoulda'
   gem 'faker'
-  gem 'spork', '0.9.0.rc7'
-  gem 'watchr'
+  gem 'spork', '0.9.0.rc8'
 end
 
-group :noload do
-  gem 'factory_girl_rails'
-end
