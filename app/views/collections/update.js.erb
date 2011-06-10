@@ -1,0 +1,4 @@
+$("form#switch_collection").html("<%= escape_javascript(select_tag_for_switch_collection) %>");
+$("#reel_name").html("<%= escape_javascript(current_collection.reload.name) %>");
+$("#current_collection .label").show();
+$("#current_collection form").hide();

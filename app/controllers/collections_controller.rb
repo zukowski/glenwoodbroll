@@ -28,10 +28,14 @@ class CollectionsController < ApplicationController
 
   # Changes the current collection
   def switch
-    @collection = Collection.find(params[:collection][:id])
+    @collection = Collection.find params[:collection_id]
     authorize! :read, @collection
     session[:cid] = @collection.id
-    redirect_to :back, :notice => "Reel changed to #{@collection.name}"
+
+    respond_to do |format|
+      format.html { redirect_to :back, :notice => "Reel changed to #{@collection.name}" }
+      format.js
+    end
   end
 
   def create
@@ -45,10 +49,14 @@ class CollectionsController < ApplicationController
   end
 
   def update
-    if @collection.update_attributes(params[:collection])
-      redirect_to :back, :notice => 'Reel updated'
-    else
-      redirect_to :back, :alert => 'Invalid name'
+    respond_to do |format|
+      if @collection.update_attributes params[:collection]
+        format.html { redirect_to :back, :notice => 'Reel updated' }
+        format.js
+      else
+        format.html { redirect_to :back, :alert => 'Invalid name' }
+        format.js   { render :text => 'alert("Invalid name")' }
+      end
     end
   end
 

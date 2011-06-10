@@ -18,4 +18,8 @@ module ApplicationHelper
       button_to('Remove', depopulate_collection_path(current_collection, :video_id => video.id), :method => :post, :class => 'button')
     end
   end
+
+  def select_tag_for_switch_collection
+    select_tag(:collection_id, options_from_collection_for_select(current_user.collections, :id, :name, current_collection.id))
+  end
 end
