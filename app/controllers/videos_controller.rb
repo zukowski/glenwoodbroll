@@ -9,6 +9,10 @@ class VideosController < ApplicationController
   end
   
   def new
+  	Dir.chdir(RAILS_ROOT + "/assets/videos/avi")
+  	@files = Dir["*.*"]
+  	@videos = []
+  	@files.each { |v| @videos << [v.gsub(/\.[a-zA-Z0-0]{3,4}/,''),v] }
   end
 	
   def create

@@ -341,7 +341,9 @@ input.button {
 #user_submit:hover, #collection_submit:hover {
 	color:#555;
 	border:1px solid #bbb;
-}	
+}
+
+input#video_submit { width: 100px; }
 
 input.add-to-reel {
 	width:100px;
