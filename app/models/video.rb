@@ -2,7 +2,7 @@ class Video < ActiveRecord::Base
   belongs_to :category
   has_and_belongs_to_many :collections
 
-  validates :title, :description, :category, :video, :presence => true
+  validates :title, :description, :category, :presence => true
   validates :duration, :numericality => {:only_integer => true}, :allow_nil => true
  
   def self.search(params)
