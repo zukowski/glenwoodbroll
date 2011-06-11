@@ -10,9 +10,9 @@
 <div class="clear"></div> 
 <div class="videos">
   <span class="tiny-header">Videos</span>
-  <% current_collection.videos.each do |video| %>
-    <span class="video"><%= video.title %></span>
-  <% end %>
+  <span id="current_reel_videos">
+    <%= render :partial => 'shared/current_reel_video', :collection => current_collection.videos, :as => :video %>
+  </span>
   <% if current_collection.empty? %>
     No Videos Selected
   <% end %>

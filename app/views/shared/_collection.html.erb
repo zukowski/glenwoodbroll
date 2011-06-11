@@ -7,7 +7,7 @@
 
 <h4>Switch Reels</h4>
 <% if current_user.collections.count > 1 %>
-  <%= form_tag(switch_collections_path, :remote => :true, :method => :post, :id => 'switch_collection') do %>
+  <%= form_tag(switch_collections_path, :method => :post, :id => 'switch_collection') do %>
     <%= select_tag_for_switch_collection %>
     <noscript>
       <%= submit_tag "Switch", :id => 'switch_button' %>

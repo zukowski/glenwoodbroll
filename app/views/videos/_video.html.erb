@@ -1,40 +1,40 @@
 <li>
-	<div class="shadow-box">
-		<div class="t">
-			<div class="r">
-				<div class="b">
-					<div class="l">
-						<div class="content">
-							<h2><%= link_to video.title, video_path(video), :class => 'title' %></h2>
-							<div class="actions">
-								<%= link_to('Edit', edit_video_path(video), :class => 'button edit') if can?(:edit, video) %> 
-								<%= link_to_populate(video) %>
-							</div>
-							<div class="video-preview"></div>
-							<table class="video-info">
-								<tr>
-									<td class="label">Category:</td>
-									<td><%= video.category.name if !video.category.nil? %></td>
-								</tr>
-								<tr>
-									<td class="label">Duration:</td>
-									<td><%= video.duration || "N/A" %></td>
-								</tr>
-								<tr>
-									<td class="label">Posted:</td>
-									<td><%= time_ago_in_words(video.created_at) %> ago</td>
-								</tr>
-							</table>
-							<p><%= video.description %></p>
-							<div class="clear"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="tl"></div>
-		<div class="tr"></div>
-		<div class="br"></div>
-		<div class="bl"></div>
+  <div class="shadow-box">
+    <div class="t">
+      <div class="r">
+        <div class="b">
+          <div class="l">
+            <div class="content">
+              <h2><%= link_to video.title, video_path(video), :class => 'title' %></h2>
+              <div class="actions">
+                <%= link_to('Edit', edit_video_path(video), :class => 'button edit') if can?(:edit, video) %> 
+                <%= link_to_populate(video) %>
+              </div>
+              <div class="video-preview"></div>
+              <table class="video-info">
+                <tr>
+                  <td class="label">Category:</td>
+                  <td><%= video.category.name if !video.category.nil? %></td>
+                </tr>
+                <tr>
+                  <td class="label">Duration:</td>
+                  <td><%= video.duration || "N/A" %></td>
+                </tr>
+                <tr>
+                  <td class="label">Posted:</td>
+                  <td><%= time_ago_in_words(video.created_at) %> ago</td>
+                </tr>
+              </table>
+              <p><%= video.description %></p>
+              <div class="clear"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tl"></div>
+    <div class="tr"></div>
+    <div class="br"></div>
+    <div class="bl"></div>
   </div>
 </li>

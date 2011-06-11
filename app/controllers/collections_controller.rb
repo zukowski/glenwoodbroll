@@ -15,15 +15,24 @@ class CollectionsController < ApplicationController
   # Adds a video to the collection
   def populate
     @video = Video.find(params[:video_id])
+    render :nothing => true and return if @collection.videos.include? @video
     @collection << @video
-    redirect_to :back, :notice => "Video added to your reel."
+
+    respond_to do |format|
+      format.html { redirect_to :back, :notice => "Video added to your reel." }
+      format.js
+    end
   end
 
   # Removes a video from the collection
   def depopulate
-    @video = Video.find(params[:video_id])
-    @collection.videos = @collection.videos.reject {|v| v.id == params[:video_id]}
-    redirect_to :back, :notice => "Video removed from your reel."
+    @video = Video.find params[:video_id]
+    @collection.videos.delete(@video)
+
+    respond_to do |format|
+      format.html { redirect_to :back, :notice => "Video removed from your reel." }
+      format.js
+    end
   end
 
   # Changes the current collection
