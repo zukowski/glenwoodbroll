@@ -5,6 +5,8 @@
   </div>
 </div>
 
+<%= link_to "Build Reel for Download", show_build_collection_path(current_collection), :class => 'button large', :style => 'width:173px;font-size:14px;height:25px;' %>
+
 <h4>Switch Reels</h4>
 <% if current_user.collections.count > 1 %>
   <%= form_tag(switch_collections_path, :method => :post, :id => 'switch_collection') do %>
@@ -20,3 +22,4 @@
   <%= f.text_field :name, :size => 22 %>
   <%= f.submit 'Create', :class => 'button', :style => 'margin-top:6px;' %>
 <% end %>
+
