@@ -9,6 +9,7 @@ class VideosController < ApplicationController
   end
   
   def new
+  	@video_select_options = video_select_options
   end
 	
   def create
@@ -20,6 +21,7 @@ class VideosController < ApplicationController
   end
 
   def edit
+  	@video_select_options = video_select_options
   end
   
   def update
@@ -36,6 +38,14 @@ class VideosController < ApplicationController
   end
   
   private
+  
+  def video_select_options
+  	Dir.chdir(RAILS_ROOT + "/assets/videos/avi")
+  	@files = Dir["*.*"]
+  	@video_select_options = []
+  	@files.each { |v| @video_select_options << [v.gsub(/\.[a-zA-Z0-0]{3,4}/,''),v] }
+  	@video_select_options
+  end
   
   def search_params
     params.select {|k,v| ['category_id','keywords'].include?(k)}
