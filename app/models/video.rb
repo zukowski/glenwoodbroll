@@ -5,8 +5,6 @@ class Video < ActiveRecord::Base
   validates :title, :description, :category, :presence => true
   validates :duration, :numericality => {:only_integer => true}, :allow_nil => true
   
-  mount_uploader :video, VideoUploader
- 
   def self.search(params)
     results = scoped
     results = results.where('title LIKE ? OR description LIKE ?', "%#{params[:keywords]}%", "%#{params[:keywords]}%")

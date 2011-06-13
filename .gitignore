@@ -2,6 +2,6 @@
 db/*.sqlite3
 log/*.log
 tmp/
-Gemfile.lock
 config/database.yml
 .rvmrc
+.redcar

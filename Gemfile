@@ -6,7 +6,6 @@ gem 'mysql2', '0.2.6'
 
 gem 'devise'
 gem 'cancan'
-gem 'carrierwave'
 
 gem 'jquery-rails'
 
