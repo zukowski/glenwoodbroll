@@ -1,8 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.7'
-gem 'sqlite3'
-gem 'mysql2', '0.2.6'
+gem 'rails', '3.0.9'
 
 gem 'devise'
 gem 'cancan'
@@ -10,6 +8,11 @@ gem 'rubyzip', :require => 'zip/zip'
 gem 'aws'
 
 gem 'jquery-rails'
+
+group :production do
+  gem 'passenger'
+  gem 'mysql2', '0.2.6'
+end
 
 group :test do
   gem 'factory_girl_rails', :require => false
@@ -19,3 +22,6 @@ group :test do
   gem 'spork', '0.9.0.rc8'
 end
 
+group :development, :test do
+  gem 'sqlite3'
+end
