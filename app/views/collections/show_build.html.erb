@@ -1,8 +1,8 @@
 <h1>Build your Reel</h1>
 
-<%= form_for @collection, :url => build_collection_url(@collection) do |f| %>
+<%= form_for @collection, :url => build_collection_url(@collection, :zip), :html => {:method => :post}  do |f| %>
   <h2>Select a video format</h2>
-  <%= select_tag :format, options_for_select(Video.encoding_options) %>
+  <%= select_tag :video_format, options_for_select(Video.encoding_options) %>
 
   <h2>Your Videos</h2>
   <ul>

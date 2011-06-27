@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110601232122) do
+ActiveRecord::Schema.define(:version => 20110623165150) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20110601232122) do
     t.datetime "updated_at"
     t.integer  "category_id"
     t.string   "video"
+    t.string   "file_name"
   end
 
 end
