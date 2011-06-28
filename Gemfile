@@ -24,4 +24,5 @@ end
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'capistrano'
 end
