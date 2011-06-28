@@ -1,0 +1,38 @@
+ssh_options[:username] = "passenger"
+ssh_options[:forward_agent] = true
+
+set :application, "gscra"
+set :repository,  "ssh://bz-labs.com:2222/home/git/gscra.git"
+set :port, 2222
+set :scm, :git
+set :deploy_to, "/var/www/#{application}"
+
+role :web, "bz-labs.com"
+role :app, "bz-labs.com"
+role :db,  "bz-labs.com", :primary => true
+
+after "deploy", "deploy:cleanup"
+after "deploy", "deploy:migrate"
+
+namespace :deploy do
+  task :start do ; end
+  task :stop do ; end
+  task :restart, :roles => :app, :except { :no_release => true } do
+    run "#{try_sudo} touch #{File.join(current_path, 'tmp', 'restart.txt')}"
+  end
+
+  task :migrate do
+    run "cd #{release_path}; rake RAILS_ENV=production db:migrate"
+  end
+end
+
+namespace :db do
+  desc <<-DESC
+    [internal] Updates the symlink for database.yml file to the just deployed release
+  DESC
+  task :symlink, :except => { :no_release => true } do
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  end
+  after "deploy:finalize_update", "db:symlink"
+end
+
