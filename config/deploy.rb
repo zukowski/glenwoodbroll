@@ -1,8 +1,13 @@
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+require 'bundler/capistrano'
+require 'rvm/capistrano'
+set :rvm_ruby_string, '1.9.2@glenwoodbroll'
+set :rvm_type, :user
+
 ssh_options[:username] = "passenger"
-ssh_options[:forward_agent] = true
 
 set :application, "gscra"
-set :repository,  "ssh://bz-labs.com:2222/home/git/gscra.git"
+set :repository,  "ssh://git@bz-labs.com:2222/home/git/gscra.git"
 set :port, 2222
 set :scm, :git
 set :deploy_to, "/var/www/#{application}"
@@ -17,12 +22,12 @@ after "deploy", "deploy:migrate"
 namespace :deploy do
   task :start do ; end
   task :stop do ; end
-  task :restart, :roles => :app, :except { :no_release => true } do
+  task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path, 'tmp', 'restart.txt')}"
   end
 
   task :migrate do
-    run "cd #{release_path}; rake RAILS_ENV=production db:migrate"
+    run "cd #{release_path}; bundle exec rake RAILS_ENV=production db:migrate"
   end
 end
 
