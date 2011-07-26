@@ -10,24 +10,28 @@ class CollectionsController < ApplicationController
 
   # Performs the build
   def build
-#    respond_to do |format|
-#      format.zip do
-#        s3 = Aws::S3.new(S3[:access_key], S3[:secret_key], :protocol => :http, :port => 80)
-#        bucket = s3.bucket(S3[:bucket)
-#        headers['Cache-Control'] = 'no-cache'
-#
-#        tmp_filename = "#{Rails.root.to_s}/tmp/collection_#{Time.now.to_f.to_s}.zip"
-#
-#        Zip::ZipFile.open(tmp_filename, Zip::ZipFile::CREATE) do |zip|
-#          @collection.videos.each do |video|
-#            s3_object_key = "#{video.file_name}.#{params[:video_format]}"
-#          @files.each { |f| zip.add("videos/#{f}", "#{Rails.root.to_s}/tmp/videos/#{f}") }
-#        end
-#
-#        send_data(File.open(tmp_filename, "rb+").read, :type => 'application/zip', :disposition => 'attachment', :filename => tmp_filename.to_s)
-#        File.delete tmp_filename
-#      end
-#    end
+    respond_to do |format|
+      format.zip do
+        bucket = s3_bucket
+        headers['Cache-Control'] = 'no-cache'
+        folder = "test_videos"
+
+        tmp_filename = "#{Rails.root.to_s}/tmp/collection_#{Time.now.to_f.to_s}.zip"
+
+        Zip::ZipFile.open(tmp_filename, Zip::ZipFile::CREATE) do |zip|
+          @collection.videos.each do |video|
+            s3_object_key = "#{folder}/#{video.file_name}.#{params[:video_format]}"
+            tmpfile = Tempfile.new("#{video.file_name}")
+            tmpfile.write(bucket.key(s3_object_key).get)
+            tmpfile.rewind
+            zip.add(s3_object_key, tmpfile.path)
+          end
+        end
+
+        send_data(File.open(tmp_filename, "rb+").read, :type => 'application/zip', :disposition => 'attachment', :filename => tmp_filename.to_s)
+        File.delete tmp_filename
+      end
+    end
   end
 
   # Adds a video to the collection

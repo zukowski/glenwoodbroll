@@ -10,6 +10,7 @@ class VideosController < ApplicationController
   
   def new
   	@video_select_options = video_select_options
+    flash.now.alert = 'No Videos Available' if @video_select_options.empty?
   end
 	
   def create
@@ -33,18 +34,18 @@ class VideosController < ApplicationController
   end
   
   def destroy
-  	@video.destroy
-  	redirect_to Video, :notice => 'Video record was deleted.'
+    @video.destroy
+    redirect_to Video, :notice => 'Video record was deleted.'
   end
   
   private
   
   def video_select_options
-  	Dir.chdir(RAILS_ROOT + "/assets/videos/avi")
-  	@files = Dir["*.*"]
-  	@video_select_options = []
-  	@files.each { |v| @video_select_options << [v.gsub(/\.[a-zA-Z0-0]{3,4}/,''),v] }
-  	@video_select_options
+    bucket = s3_bucket
+    keys = bucket.keys.map(&:to_s)
+    keys = keys.select {|k| k =~ /^test_videos\/.*\.avi$/}.map {|k| k.gsub('test_videos/','').gsub('.avi','')}
+    existing_keys = Video.all.map(&:file_name)
+    keys.reject {|k| existing_keys.include? k}
   end
   
   def search_params

@@ -19,8 +19,8 @@
     <%= f.collection_select :category_id, Category.all, :id, :name, :prompt => "Select a category" %><br />
   </div>
   <div class="field">
-    <%= f.label :video_file %><br />
-    <%= f.select(:video, options_for_select(@video_select_options)) %>
+    <%= f.label :file_name %><br />
+    <%= f.select(:file_name, options_for_select(@video_select_options)) %>
   </div>
   <div class="field">
     <%= f.label :description %><br />

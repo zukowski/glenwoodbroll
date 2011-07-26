@@ -32,4 +32,8 @@ class ApplicationController < ActionController::Base
     end
     @current_collection
   end
+
+  def s3_bucket
+    @bucket ||= Aws::S3.new(S3[:access_key], S3[:secret_key], :protocol => :http, :port => 80).bucket(S3[:bucket])
+  end
 end
