@@ -4,3 +4,4 @@ log/*.log
 tmp/
 config/database.yml
 .redcar
+config/initializers/aws_credentials.rb

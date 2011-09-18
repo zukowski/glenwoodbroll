@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.9'
 
-gem 'devise'
+gem 'devise', '1.2.rc2'
 gem 'cancan'
 gem 'rubyzip', :require => 'zip/zip'
 gem 'aws'
