@@ -15,4 +15,12 @@ class Video < ActiveRecord::Base
   def self.encoding_options
     [['avi', 'avi'],['mp4','mp4']]
   end
+
+  def flv_url
+    "http://gsrca-flv.s3-website-us-east-1.amazonaws.com/flv/" + self.file_name + ".flv"
+  end
+
+  def flv_preview_image
+   "http://gsrca-flv.s3-website-us-east-1.amazonaws.com/flv/" + self.file_name + ".jpg"
+  end
 end

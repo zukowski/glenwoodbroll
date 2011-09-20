@@ -20,7 +20,7 @@
   </div>
   <div class="field">
     <%= f.label :file_name %><br />
-    <%= f.select(:file_name, options_for_select(@video_select_options)) %>
+    <%= f.select(:file_name, options_for_select(@video_select_options, @video.file_name)) %>
   </div>
   <div class="field">
     <%= f.label :description %><br />

@@ -10,7 +10,23 @@
                 <%= link_to('Edit', edit_video_path(video), :class => 'button edit') if can?(:edit, video) %> 
                 <%= link_to_populate(video) %>
               </div>
-              <div class="video-preview"></div>
+              <div class="video-preview">
+                <div id="player-<%= video.file_name %>">
+                  You need to have <%= link_to 'Flash Player', 'http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash' %> installed to display this video
+                </div>
+
+                <script type="text/javascript">
+                  var so = new SWFObject('/flash/player.swf', 'mpl', '250', '164', '8');
+                  so.addParam('allowscriptaccess', 'always');
+                  so.addParam('allowfullscreen', 'true');
+                  so.addVariable('height', '164');
+                  so.addVariable('width', '250');
+                  so.addVariable('file', '<%= video.flv_url %>');
+                  so.addVariable('image', '<%= video.flv_preview_image %>');
+                  so.write('player-<%= video.file_name %>');
+                </script>
+              
+              </div>
               <table class="video-info">
                 <tr>
                   <td class="label">Category:</td>

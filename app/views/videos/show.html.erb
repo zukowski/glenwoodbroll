@@ -7,10 +7,6 @@
 			<td><%= @video.category.name %></td>
 		</tr>
 		<tr>
-			<td class="label">Duration:</td>
-			<td><%= @video.duration || "N/A" %></td>
-		</tr>
-		<tr>
 			<td class="label">Posted:</td>
 			<td><%= time_ago_in_words(@video.created_at) %> ago</td>
 		</tr>

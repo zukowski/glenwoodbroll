@@ -43,9 +43,9 @@ class VideosController < ApplicationController
   def video_select_options
     bucket = s3_bucket
     keys = bucket.keys.map(&:to_s)
-    keys = keys.select {|k| k =~ /^test_videos\/.*\.avi$/}.map {|k| k.gsub('test_videos/','').gsub('.avi','')}
-    existing_keys = Video.all.map(&:file_name)
-    keys.reject {|k| existing_keys.include? k}
+    keys = keys.select {|k| k =~ /^videos\/.*\.avi$/}.map {|k| k.gsub('videos/','').gsub('.avi','')}
+    #existing_keys = Video.all.map(&:file_name)
+    #keys.reject {|k| existing_keys.include? k}
   end
   
   def search_params
