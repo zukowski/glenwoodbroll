@@ -17,6 +17,7 @@ role :app, "bz-labs.com"
 role :db,  "bz-labs.com", :primary => true
 
 after "deploy", "deploy:cleanup"
+after "deploy", "deploy:symlink_config"
 after "deploy", "deploy:migrate"
 
 namespace :deploy do
@@ -29,16 +30,11 @@ namespace :deploy do
   task :migrate do
     run "cd #{release_path}; bundle exec rake RAILS_ENV=production db:migrate"
   end
-end
 
-namespace :db do
-  desc <<-DESC
-    [internal] Updates the symlink for database.yml file to the just deployed release
-  DESC
-  task :symlink, :except => { :no_release => true } do
+  task :symlink_config, :except => { :no_release => true } do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/config/aws_credentials.rb #{release_path}/config/initializers/aws.rb"
   end
-  after "deploy:finalize_update", "db:symlink"
 end
 
 desc "Remote console on the production appserver"
