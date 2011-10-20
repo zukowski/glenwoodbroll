@@ -17,10 +17,10 @@ class Video < ActiveRecord::Base
   end
 
   def flv_url
-    "http://gsrca-flv.s3-website-us-east-1.amazonaws.com/flv/" + self.file_name + ".flv"
+    "https://s3.amazonaws.com/gsrca-flv/flv/" + self.file_name + ".flv"
   end
 
   def flv_preview_image
-   "http://gsrca-flv.s3-website-us-east-1.amazonaws.com/flv/" + self.file_name + ".jpg"
+   "https://s3.amazonaws.com/gsrca-flv/flv/" + self.file_name + ".jpg"
   end
 end
