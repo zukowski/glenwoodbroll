@@ -14,13 +14,13 @@ class CollectionsController < ApplicationController
       format.zip do
         bucket = s3_bucket
         headers['Cache-Control'] = 'no-cache'
-        folder = "test_videos"
+        #folder = "test_videos"
 
         tmp_filename = "#{Rails.root.to_s}/tmp/collection_#{Time.now.to_f.to_s}.zip"
 
         Zip::ZipFile.open(tmp_filename, Zip::ZipFile::CREATE) do |zip|
           @collection.videos.each do |video|
-            s3_object_key = "#{folder}/#{video.file_name}.#{params[:video_format]}"
+            s3_object_key = "#{video.file_name}.#{params[:video_format]}"
             tmpfile = Tempfile.new("#{video.file_name}")
             tmpfile.write(bucket.key(s3_object_key).get)
             tmpfile.rewind
